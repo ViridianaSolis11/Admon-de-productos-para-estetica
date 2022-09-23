@@ -18,7 +18,7 @@ app.post('/create', (req, res) =>{
     const price = req.body.price;
     const stock = req.body.stock;
 
-    db.query('INSERT INTO products (name, precio, stock) VALUES (?, ?, ?)', [name, price, stock], (err, result) =>{
+    db.query('INSERT INTO products (name, price, stock) VALUES (?, ?, ?)', [name, price, stock], (err, result) =>{
 
         if (err){
             console.log(err);
@@ -39,15 +39,26 @@ app.get('/getProducts', (req, res) => {
 });
 
 app.put('/updateProduct', (req, res) => {
-    const id = req.body.id;
+    const idproducts = req.body.idproducts;
     const name = req.body.name;
     const price = req.body.price;
     const stock = req.body.stock;
 
-    db.query('UPDATE SET products name = ?, price = ?, stock = ? WHERE id = ?', [name, price, stock, id],  (err, result) => {
+    db.query('UPDATE products SET name = ?, price = ?, stock = ? WHERE idproducts = ?', [name, price, stock, idproducts],  (err, result) => {
         if(err) {
             console.log(err);
         }else {
+            res.send(result);
+        }
+    });
+});
+
+app.delete('/deleteProduct/:id', (req, res) => {
+    const id = req.params.id;
+    db.query('DELETE FROM products WHERE idproducts = ?', id, (err, result) => {
+        if(err){
+            console.log(err);
+        }else{
             res.send(result);
         }
     });
