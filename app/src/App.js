@@ -5,46 +5,86 @@ import Axios from 'axios'
 function App() {
 
   const [name, setName] = useState("");
-  const [price, setPrice] = useState(0);
-  const [stock, setStock] = useState(0);
+  const [firstname, setFirstName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [debt, setDebt] = useState("");
 
-  const [productList, setProductList] = useState([]);
+  //variables for update
+  const [newName, setNewName] = useState("");
+  const [newFirstname, setNewFirstname] = useState(0);
+  const [newPhone, setNewPhone] = useState(0);
+  const [newDebt, setNewDebt] = useState("");
+
+  const [clientList, setClientList] = useState([]);
   
-  const addProduct = () => {
-    Axios.post('http://localhost:3001/create', {
-      name: name, 
-      price: price, 
-      stock: stock,
-    }).then(() => {
-      console.log('successfully added');
-    });
-  };
-
-  const getProducts = () => {
-    Axios.get('http://localhost:3001/getProducts').then((response) => {
-      setProductList(response.data);
-    });
-  };
-
   useEffect(() => {
-    getProducts();
-  });
+    getClients();
+  }, []);
+
+ // CRUD CLIENTS 
+
+  const addClient = () => {
+    Axios.post('http://localhost:3001/createClient', {
+      name: name,
+      firstname: firstname,
+      phone: phone,
+      debt: debt 
+    }).then(() => {
+      getClients();
+    });
+  };
+
+  const getClients = () => {
+    Axios.get('http://localhost:3001/getClients').then((response) => {
+      setClientList(response.data);
+      console.log(response);
+    });
+  };
+
+  const updateClient = (id) => {
+    Axios.put('http://localhost:3001/updateClient', {
+      name: name,
+      firstname: firstname,
+      phone: phone,
+      debt: debt,
+      idclient: id
+    }).then(() => {
+      alert("actualizado!!");
+      getClients();
+    });
+  };
+
+  const deleteClient = (id) => {
+    Axios.delete(`http://localhost:3001/deleteClient/${id}`).then(()=> {
+      getClients();
+    });
+  };
 
   return (
     <div className="App">
+
+      <div><h3>CLIENTES</h3></div>
       <label>Nombre:</label>
       <input type="text" onChange={(event) => {setName(event.target.value);}}/>
-      <label>Precio:</label>
-      <input type="number" onChange={(event) => {setPrice(event.target.value);}}/>
-      <label>Stock:</label>
-      <input type="number" onChange={(event) => {setStock(event.target.value);}}/>
-      <button onClick={addProduct}> Añadir producto </button>
+      <label>Apellido:</label>
+      <input type="text" onChange={(event) => {setFirstName(event.target.value);}}/>
+      <label>Telefono:</label>
+      <input type="text" onChange={(event) => {setPhone(event.target.value);}}/>
+      <label>Deuda:</label>
+      <input type="text" onChange={(event) => {setDebt(event.target.value);}}/>
+      <button onClick={addClient}> Añadir Cliente </button>
 
-      <div>
-        {productList.map((val, key) => {
-        return <div> {val.name} {val.precio} {val.stock} </div>
-        })}
-      </div>
+      <br></br><br></br><br></br>
+
+      {clientList.map((val, key) => {
+        return <div>
+              <div>
+                <input type="text" placeholder={val.name} onChange={(event) => {setNewName(event.target.value);}}/>
+                <button onClick={ () => {updateClient(val.idcategory);}}>Editar</button>
+                <button  onClick={ () => {deleteClient(val.idcategory);}}>Eliminar</button>
+              </div>
+            </div>
+      })}
 
     </div>
   );

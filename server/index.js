@@ -10,15 +10,16 @@ const db = mysql.createConnection({
     user: 'root',
     host: 'localhost',
     password: 'root',
-    database: 'inventariodb',
+    database: 'inventariodb_test',
 });
 
-app.post('/create', (req, res) =>{
+app.post('/createClient', (req, res) =>{
     const name = req.body.name;
-    const price = req.body.price;
-    const stock = req.body.stock;
+    const firstname = req.body.firstname;
+    const phone = req.body.phone;
+    const debt = req.body.debt;
 
-    db.query('INSERT INTO products (name, precio, stock) VALUES (?, ?, ?)', [name, price, stock], (err, result) =>{
+    db.query('INSERT INTO clients (name, firstname, phone, debt) VALUES (?,?,?,?)', [name, firstname, phone, debt], (err, result) =>{
 
         if (err){
             console.log(err);
@@ -28,8 +29,8 @@ app.post('/create', (req, res) =>{
     });
 });
 
-app.get('/getProducts', (req, res) => {
-    db.query('SELECT * FROM products', (err, result) => {
+app.get('/getClients', (req, res) => {
+    db.query('SELECT * FROM clients', (err, result) => {
         if(err) {
             console.log(err);
         }else{
@@ -38,16 +39,28 @@ app.get('/getProducts', (req, res) => {
     });
 });
 
-app.put('/updateProduct', (req, res) => {
-    const id = req.body.id;
+app.put('/updateClient', (req, res) => {
+    const idclient = req.body.idclient;
     const name = req.body.name;
-    const price = req.body.price;
-    const stock = req.body.stock;
+    const firstname = req.body.firstname;
+    const phone = req.body.phone;
+    const debt = req.body.debt;
 
-    db.query('UPDATE SET products name = ?, price = ?, stock = ? WHERE id = ?', [name, price, stock, id],  (err, result) => {
+    db.query('UPDATE clients SET name = ?, firstname = ?, phone = ?, debt = ? WHERE idclient = ?', [name, firstname, phone, debt, idclient],  (err, result) => {
         if(err) {
             console.log(err);
         }else {
+            res.send(result);
+        }
+    });
+});
+
+app.delete('/deleteClient/:id', (req, res) => {
+    const id = req.params.id;
+    db.query('DELETE FROM clients WHERE idclient = ?', id, (err, result) => {
+        if(err){
+            console.log(err);
+        }else{
             res.send(result);
         }
     });
