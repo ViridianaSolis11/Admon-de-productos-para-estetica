@@ -1,8 +1,10 @@
 import './App.css';
 import {useState, useEffect} from "react";
 import Axios from 'axios'
-import Boton from './Boton.jsx';
-import Datos from './Datos';
+import Datos from './Datos'
+import { ButtonAccept, ButtonCancel,ButtonClient,ButtonLine,ButtonCategory,ButtonCreate, ButtonNote,ButtonProduct,ButtonAdd } from './Button.jsx';
+import Siderbar from './Siderbar.jsx';
+import { ButtonClip, ButtonClose, ButtonMoney, ButtonPencil, ButtonPlus, ButtonShow, ButtonTrash } from './ButtonIcons';
 
 function App() {
   const [name, setName] = useState("");
@@ -54,6 +56,8 @@ const [productList, setProductList] = useState([]);
         Axios.delete(`http://localhost:3001/deleteProduct/${id}`).then(()=> {
           getProducts();
         });
+
+
       };
 
   
@@ -65,11 +69,6 @@ const [productList, setProductList] = useState([]);
   return (
 
     <div className="App">
-      <Boton />
-      <Datos/>
-
-      <br></br><br></br><br></br>
-
       {productList.map((val, key) => {
         return <div>
               
@@ -82,6 +81,24 @@ const [productList, setProductList] = useState([]);
               </div>
             </div>
       })}
+      <ButtonAccept/>
+      <ButtonCancel/>
+      <ButtonClient/>
+      <ButtonLine/>
+      <ButtonCategory/>
+       <ButtonCreate/>
+       <ButtonNote/>
+       <ButtonProduct/>
+       <ButtonAdd/> 
+      <Siderbar/>
+      <ButtonClip/>
+      <ButtonShow/>
+      <ButtonPencil/>
+      <ButtonTrash/>
+      <ButtonMoney/>
+      <ButtonPlus/>
+      <ButtonClose/>
+      <Datos/>
 
     </div>
   );

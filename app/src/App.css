@@ -1,4 +1,69 @@
+.body{
+  margin: 0px;
+}
 .App {
   text-align: center;
 }
+.container{
+  width: 80px;
+  height:100vh;
+  background-color: rgb(111, 94, 118);
+}
+.list{
+  list-style-type: none;
+}
+.ul
+{
+  margin: 20px 0px 20px 0px;
+  padding: 15px 0px 20px 0px;
+}
+.icons{
+  display:inline;
+  color: #FFDDE2;
+  margin-bottom: 30px;
+  font-size: 30px;
+}
+.prueba{
+  width: 80px;
+  height: 40px;
+  margin-top: 350px;
+}
+.button1{
+  
+  width: auto;
+  height: 35px;
+  border: solid 2px rgb(91, 82, 107);
+  background-color: rgb(111, 94, 118);
+  margin-top: 5px;
+  margin-right: 10px;
+  display: flex;
+  text-align: center;
+}
 
+.button2{
+  width: auto;
+  height: 35px;
+  border: solid 2px rgb(91, 82, 107);
+  background-color: rgb(255,255, 255);
+  margin-top: 5px;
+  margin-right: 10px;
+  display: flex;
+  /*float: left;*/
+  text-align: center;
+}
+ .buttonPequeño{
+  width: 30px;
+  height: 30px;
+  border: solid 2px rgb(91, 82, 107);
+  background-color: white;
+  float: left;
+  margin-right: 15px;
+  
+ }
+
+ .icons2{
+  display:inline;
+  color: rgb(91, 82, 107);
+  margin-bottom: 25px;
+  font-size: 25px;
+}
