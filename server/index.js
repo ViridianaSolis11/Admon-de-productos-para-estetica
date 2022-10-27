@@ -46,7 +46,7 @@ app.put('/updateClient', (req, res) => {
     const phone = req.body.phone;
     const debt = req.body.debt;
 
-    db.query('UPDATE clients SET name = ?, firstname = ?, phone = ?, debt = ? WHERE idclient = ?', [name, firstname, phone, debt, idclient],  (err, result) => {
+    db.query('UPDATE clients SET name = ?, firstName = ?, phone = ?, debt = ? WHERE idclient = ?', [name, firstname, phone, debt, idclient],  (err, result) => {
         if(err) {
             console.log(err);
         }else {

@@ -43,10 +43,10 @@ function App() {
 
   const updateClient = (id) => {
     Axios.put('http://localhost:3001/updateClient', {
-      name: name,
-      firstname: firstname,
-      phone: phone,
-      debt: debt,
+      name: newName,
+      firstname: newFirstname,
+      phone: newPhone,
+      debt: newDebt,
       idclient: id
     }).then(() => {
       alert("actualizado!!");
@@ -80,8 +80,11 @@ function App() {
         return <div>
               <div>
                 <input type="text" placeholder={val.name} onChange={(event) => {setNewName(event.target.value);}}/>
-                <button onClick={ () => {updateClient(val.idcategory);}}>Editar</button>
-                <button  onClick={ () => {deleteClient(val.idcategory);}}>Eliminar</button>
+                <input type="text" placeholder={val.firstName} onChange={(event) => {setNewFirstname(event.target.value);}}/>
+                <input type="text" placeholder={val.phone} onChange={(event) => {setNewPhone(event.target.value);}}/>
+                <input type="text" placeholder={val.debt} onChange={(event) => {setNewDebt(event.target.value);}}/>
+                <button onClick={ () => {updateClient(val.idclient);}}>Editar</button>
+                <button  onClick={ () => {deleteClient(val.idclient);}}>Eliminar</button>
               </div>
             </div>
       })}
