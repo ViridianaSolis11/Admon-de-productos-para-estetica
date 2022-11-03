@@ -14,12 +14,12 @@ const db = mysql.createConnection({
 });
 
 app.post('/createTickets', (req, res) =>{
-    const id = 3; // ESTO NO SUPIMOS COMO SALVARLO
+    const idTicket = null;
     const id_client = req.body.id_client;
     const total_cost = req.body.total_cost;
     const payed = req.body.payed;
 
-    db.query('INSERT INTO tickets (idTicket, id_client, total_cost, payed) VALUES (?,?,?)', [id,id_client, total_cost, payed], (err, result) =>{
+    db.query('INSERT INTO ticket (idTicket, id_client, total_cost, payed) VALUES (?,?,?,?)', [idTicket,id_client, total_cost, payed], (err, result) =>{
 
         if (err){
             console.log(err);
@@ -30,7 +30,7 @@ app.post('/createTickets', (req, res) =>{
 });
 
 app.get('/getTickets', (req, res) => {
-    db.query('SELECT * FROM tickets', (err, result) => {
+    db.query('SELECT * FROM ticket', (err, result) => {
         if(err) {
             console.log(err);
         }else{
@@ -45,7 +45,7 @@ app.put('/updateTickets', (req, res) => {
     const total_cost = req.body.total_cost;
     const payed = req.body.payed;
 
-    db.query('UPDATE tickets SET id_client = ?, total_cost = ?, payed = ? WHERE idTicket = ?', [id_client, total_cost, payed, idTicket],  (err, result) => {
+    db.query('UPDATE ticket SET id_client = ?, total_cost = ?, payed = ? WHERE idTicket = ?', [id_client, total_cost, payed, idTicket],  (err, result) => {
         if(err) {
             console.log(err);
         }else {
@@ -56,7 +56,7 @@ app.put('/updateTickets', (req, res) => {
 
 app.delete('/deleteTickets/:id', (req, res) => {
     const id = req.params.id;
-    db.query('DELETE FROM tickets WHERE idTicket = ?', id, (err, result) => {
+    db.query('DELETE FROM ticket WHERE idTicket = ?', id, (err, result) => {
         if(err){
             console.log(err);
         }else{

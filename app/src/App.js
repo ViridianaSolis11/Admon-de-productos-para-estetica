@@ -25,7 +25,7 @@ function App() {
     Axios.post('http://localhost:3001/createTickets', {
       id_client: id_client,
       total_cost: total_cost,
-      payed: payed 
+      payed: payed
     }).then(() => {
       getTickets();
     });
