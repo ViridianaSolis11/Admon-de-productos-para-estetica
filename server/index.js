@@ -13,13 +13,13 @@ const db = mysql.createConnection({
     database: 'inventariodb_test',
 });
 
-app.post('/createClient', (req, res) =>{
-    const name = req.body.name;
-    const firstname = req.body.firstname;
-    const phone = req.body.phone;
-    const debt = req.body.debt;
+app.post('/createTickets', (req, res) =>{
+    const id = 3; // ESTO NO SUPIMOS COMO SALVARLO
+    const id_client = req.body.id_client;
+    const total_cost = req.body.total_cost;
+    const payed = req.body.payed;
 
-    db.query('INSERT INTO clients (name, firstname, phone, debt) VALUES (?,?,?,?)', [name, firstname, phone, debt], (err, result) =>{
+    db.query('INSERT INTO tickets (idTicket, id_client, total_cost, payed) VALUES (?,?,?)', [id,id_client, total_cost, payed], (err, result) =>{
 
         if (err){
             console.log(err);
@@ -29,8 +29,8 @@ app.post('/createClient', (req, res) =>{
     });
 });
 
-app.get('/getClients', (req, res) => {
-    db.query('SELECT * FROM clients', (err, result) => {
+app.get('/getTickets', (req, res) => {
+    db.query('SELECT * FROM tickets', (err, result) => {
         if(err) {
             console.log(err);
         }else{
@@ -39,14 +39,13 @@ app.get('/getClients', (req, res) => {
     });
 });
 
-app.put('/updateClient', (req, res) => {
-    const idclient = req.body.idclient;
-    const name = req.body.name;
-    const firstname = req.body.firstname;
-    const phone = req.body.phone;
-    const debt = req.body.debt;
+app.put('/updateTickets', (req, res) => {
+    const idTicket = req.body.idTicket;
+    const id_client = req.body.id_client;
+    const total_cost = req.body.total_cost;
+    const payed = req.body.payed;
 
-    db.query('UPDATE clients SET name = ?, firstname = ?, phone = ?, debt = ? WHERE idclient = ?', [name, firstname, phone, debt, idclient],  (err, result) => {
+    db.query('UPDATE tickets SET id_client = ?, total_cost = ?, payed = ? WHERE idTicket = ?', [id_client, total_cost, payed, idTicket],  (err, result) => {
         if(err) {
             console.log(err);
         }else {
@@ -55,9 +54,9 @@ app.put('/updateClient', (req, res) => {
     });
 });
 
-app.delete('/deleteClient/:id', (req, res) => {
+app.delete('/deleteTickets/:id', (req, res) => {
     const id = req.params.id;
-    db.query('DELETE FROM clients WHERE idclient = ?', id, (err, result) => {
+    db.query('DELETE FROM tickets WHERE idTicket = ?', id, (err, result) => {
         if(err){
             console.log(err);
         }else{
