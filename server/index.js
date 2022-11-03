@@ -19,7 +19,7 @@ app.post('/createTickets', (req, res) =>{
     const total_cost = req.body.total_cost;
     const payed = req.body.payed;
 
-    db.query('INSERT INTO ticket (idTicket, id_client, total_cost, payed) VALUES (?,?,?,?)', [idTicket,id_client, total_cost, payed], (err, result) =>{
+    db.query('INSERT INTO ticket VALUES (?,?,?,?)', [idTicket,id_client, total_cost, payed], (err, result) =>{
 
         if (err){
             console.log(err);

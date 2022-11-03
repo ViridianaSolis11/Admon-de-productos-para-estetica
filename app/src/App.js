@@ -4,9 +4,9 @@ import Axios from 'axios'
 
 function App() {
 
-  const [id_client, setIdClient] = useState("");
-  const [total_cost, setTotal_Cost] = useState("");
-  const [payed, setPayed] = useState("");
+  const [id_client, setIdClient] = useState('');
+  const [total_cost, setTotal_Cost] = useState('');
+  const [payed, setPayed] = useState('');
 
   //variables for update
   const [newId_Client, setNewId_Client] = useState(0);
@@ -74,8 +74,8 @@ function App() {
         return <div>
               <div>
                 <input type="text" placeholder={val.name} onChange={(event) => {setNewId_Client(event.target.value);}}/>
-                <button onClick={ () => {updateTickets(val.idcategory);}}>Editar</button>
-                <button  onClick={ () => {deleteTickets(val.idcategory);}}>Eliminar</button>
+                <button onClick={ () => {updateTickets(val.idTicket);}}>Editar</button>
+                <button  onClick={ () => {deleteTickets(val.idTicket);}}>Eliminar</button>
               </div>
             </div>
       })}
