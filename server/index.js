@@ -13,13 +13,12 @@ const db = mysql.createConnection({
     database: 'inventariodb_test',
 });
 
-app.post('/createTickets', (req, res) =>{
-    const idTicket = null;
-    const id_client = req.body.id_client;
-    const total_cost = req.body.total_cost;
-    const payed = req.body.payed;
+app.post('/createAbonos', (req, res) =>{
+    const id = null;
+    const id_ticket = req.body.id_ticket;
+    const amount_payed = req.body.amount_payed;
 
-    db.query('INSERT INTO ticket VALUES (?,?,?,?)', [idTicket,id_client, total_cost, payed], (err, result) =>{
+    db.query('INSERT INTO abonos VALUES (?,?,?)', [id,id_ticket, amount_payed], (err, result) =>{
 
         if (err){
             console.log(err);
@@ -29,8 +28,8 @@ app.post('/createTickets', (req, res) =>{
     });
 });
 
-app.get('/getTickets', (req, res) => {
-    db.query('SELECT * FROM ticket', (err, result) => {
+app.get('/getAbonos', (req, res) => {
+    db.query('SELECT * FROM abonos', (err, result) => {
         if(err) {
             console.log(err);
         }else{
@@ -39,13 +38,12 @@ app.get('/getTickets', (req, res) => {
     });
 });
 
-app.put('/updateTickets', (req, res) => {
-    const idTicket = req.body.idTicket;
-    const id_client = req.body.id_client;
-    const total_cost = req.body.total_cost;
-    const payed = req.body.payed;
+app.put('/updateAbonos', (req, res) => {
+    const id = req.body.idabonos;
+    const id_ticket = req.body.id_ticket;
+    const amount_payed = req.body.amount_payed;
 
-    db.query('UPDATE ticket SET id_client = ?, total_cost = ?, payed = ? WHERE idTicket = ?', [id_client, total_cost, payed, idTicket],  (err, result) => {
+    db.query('UPDATE abonos SET id_ticket = ?, amount_payed = ? WHERE idabonos = ?', [id_ticket, amount_payed, id],  (err, result) => {
         if(err) {
             console.log(err);
         }else {
@@ -54,9 +52,9 @@ app.put('/updateTickets', (req, res) => {
     });
 });
 
-app.delete('/deleteTickets/:id', (req, res) => {
+app.delete('/deleteAbonos/:id', (req, res) => {
     const id = req.params.id;
-    db.query('DELETE FROM ticket WHERE idTicket = ?', id, (err, result) => {
+    db.query('DELETE FROM abonos WHERE idabonos = ?', id, (err, result) => {
         if(err){
             console.log(err);
         }else{
