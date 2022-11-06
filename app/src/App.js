@@ -68,8 +68,8 @@ function App() {
         return <div>
               <div>
                 <input type="text" placeholder={val.name} onChange={(event) => {setNewId_Ticket(event.target.value);}}/>
-                <button onClick={ () => {updateAbonos(val.idTicket);}}>Editar</button>
-                <button onClick={ () => {deleteAbonos(val.idTicket);}}>Eliminar</button>
+                <button onClick={ () => {updateAbonos(val.idabonos);}}>Editar</button>
+                <button onClick={ () => {deleteAbonos(val.idabonos);}}>Eliminar</button>
               </div>
             </div>
       })}
