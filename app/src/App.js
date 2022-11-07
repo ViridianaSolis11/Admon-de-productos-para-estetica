@@ -4,72 +4,78 @@ import Axios from 'axios'
 
 function App() {
 
-  const [id_ticket, setIdTicket] = useState('');
-  const [amount_payed, setAmountPayed] = useState('');
+  const [id_prod, setIdProd] = useState('');
+  const [id_itemticket, setIdItemTicket] = useState('');
+  const [quantity, setQuantity] = useState('');
 
   //variables for update
-  const [newId_Ticket, setNewId_Ticket] = useState(0);
-  const [NewAmount_Payed, setNewAmount_Payed] = useState(0);
+  const [newId_Prod, setNewIdProd] = useState(0);
+  const [newId_Itemticket, setNewIdItemTicket] = useState(0);
+  const [newQuantity, setNewQuantity] = useState(0);
 
   const [abonoList, setAbonoList] = useState([]);
   
   useEffect(() => {
-    getAbonos();
+    getItemTicket();
   }, []);
 
- // CRUD ABONOS
+ // CRUD Item Ticket
 
-  const addAbono = () => {
-    Axios.post('http://localhost:3001/createAbonos', {
-      id_ticket: id_ticket,
-      amount_payed: amount_payed
+  const addItemTicket = () => {
+    Axios.post('http://localhost:3001/createItemTicket', {
+      id_prod: id_prod,
+      id_itemticket: it_itemticket,
+      quantity: quantity
     }).then(() => {
-      getAbonos();
+      getItemTicket();
     });
   };
 
-  const getAbonos = () => {
-    Axios.get('http://localhost:3001/getAbonos').then((response) => {
-      setAbonoList(response.data);
+  const getItemTicket = () => {
+    Axios.get('http://localhost:3001/getItemTicket').then((response) => {
+      setItemTicketList(response.data);
       console.log(response);
     });
   };
 
-  const updateAbonos = (id) => {
-    Axios.put('http://localhost:3001/updateAbonos', {
-      id_ticket: id_ticket,
-      amount_payed: amount_payed,
-      idabonos: id
+  const updateItemTicket = (id) => {
+    Axios.put('http://localhost:3001/updateItemTicket', {
+      id_prod: id_prod,
+      id_itemticket: it_itemticket,
+      quantity: quantity,
+      iditem_ticket: id
     }).then(() => {
       alert("actualizado!!");
-      getAbonos();
+      getItemTicket();
     });
   };
 
-  const deleteAbonos = (id) => {
-    Axios.delete(`http://localhost:3001/deleteAbonos/${id}`).then(()=> {
-      getAbonos();
+  const deleteItemTicket = (id) => {
+    Axios.delete(`http://localhost:3001/deleteItemTicket/${id}`).then(()=> {
+      getItemTicket();
     });
   };
 
   return (
     <div className="App">
 
-      <div><h3>ABONOS</h3></div>
-      <label>id Ticket:</label>
-      <input type="text" onChange={(event) => {setIdTicket(event.target.value);}}/>
-      <label>Cantidad pagada:</label>
-      <input type="text" onChange={(event) => {setAmountPayed(event.target.value);}}/>
-      <button onClick={addAbono}> Añadir Abono </button>
+      <div><h3>ITEM TICKET</h3></div>
+      <label>id Producto:</label>
+      <input type="text" onChange={(event) => {setIdProd(event.target.value);}}/>
+      <label>id Item Ticket:</label>
+      <input type="text" onChange={(event) => {setIdItemTicket(event.target.value);}}/>
+      <label>Quantity:</label>
+      <input type="text" onChange={(event) => {setQuantity(event.target.value);}}/>
+      <button onClick={addItemTicket}> Añadir Item Ticket </button>
 
       <br></br><br></br><br></br>
 
-      {abonoList.map((val, key) => {
+      {ItemTicketList.map((val, key) => {
         return <div>
               <div>
-                <input type="text" placeholder={val.name} onChange={(event) => {setNewId_Ticket(event.target.value);}}/>
-                <button onClick={ () => {updateAbonos(val.idabonos);}}>Editar</button>
-                <button onClick={ () => {deleteAbonos(val.idabonos);}}>Eliminar</button>
+                <input type="text" placeholder={val.name} onChange={(event) => {setNewIdItemTicket(event.target.value);}}/>
+                <button onClick={ () => {updateItemTicket(val.idabonos);}}>Editar</button>
+                <button onClick={ () => {deleteItemTicket(val.idabonos);}}>Eliminar</button>
               </div>
             </div>
       })}
