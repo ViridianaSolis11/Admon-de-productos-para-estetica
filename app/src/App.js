@@ -13,7 +13,7 @@ function App() {
   const [newId_Itemticket, setNewIdItemTicket] = useState(0);
   const [newQuantity, setNewQuantity] = useState(0);
 
-  const [abonoList, setAbonoList] = useState([]);
+  const [ItemTicketList, setItemTicketList] = useState([]);
   
   useEffect(() => {
     getItemTicket();
@@ -24,7 +24,7 @@ function App() {
   const addItemTicket = () => {
     Axios.post('http://localhost:3001/createItemTicket', {
       id_prod: id_prod,
-      id_itemticket: it_itemticket,
+      id_itemticket: id_itemticket,
       quantity: quantity
     }).then(() => {
       getItemTicket();
@@ -41,7 +41,7 @@ function App() {
   const updateItemTicket = (id) => {
     Axios.put('http://localhost:3001/updateItemTicket', {
       id_prod: id_prod,
-      id_itemticket: it_itemticket,
+      id_itemticket: id_itemticket,
       quantity: quantity,
       iditem_ticket: id
     }).then(() => {
@@ -74,8 +74,8 @@ function App() {
         return <div>
               <div>
                 <input type="text" placeholder={val.name} onChange={(event) => {setNewIdItemTicket(event.target.value);}}/>
-                <button onClick={ () => {updateItemTicket(val.idabonos);}}>Editar</button>
-                <button onClick={ () => {deleteItemTicket(val.idabonos);}}>Eliminar</button>
+                <button onClick={ () => {updateItemTicket(val.iditem_ticket);}}>Editar</button>
+                <button onClick={ () => {deleteItemTicket(val.iditem_ticket);}}>Eliminar</button>
               </div>
             </div>
       })}
